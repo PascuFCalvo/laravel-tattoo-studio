@@ -30,5 +30,6 @@ Route::get('/', function (Request $request) {
 
 //crud controler para users
 
-Route::post('/users', [UserController::class , 'createUser']);
-Route::get('/users', [UserController::class , 'getAllUsers']);
+Route::post('/users', [UserController::class, 'createUser']);
+Route::get('/users', [UserController::class, 'getAllUsers']);
+Route::delete('/users/{id}', [UserController::class, 'deleteAUserById']);

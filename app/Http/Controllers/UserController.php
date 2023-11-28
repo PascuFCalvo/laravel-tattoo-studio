@@ -16,7 +16,7 @@ class UserController extends Controller
             $user = $request->all();
             dump($user);
 
-            $newUser = User::create([
+            $user = User::create([
                 'user_name' => $user['user_name'],
                 'email' => $user['email'],
                 'password' => $user['password'],
@@ -52,6 +52,26 @@ class UserController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Roles not found',
+                'error' => $errorMessage->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function deleteAUserById(Request $request , $id)
+    {
+        Log::info("deleteARoleById - 1");
+        try {
+            $user = User::query()->findOrFail($id);
+            $user->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'User deleted',
+                'data' => $user,
+            ], Response::HTTP_OK);
+        } catch (\Exception $errorMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not deleted',
                 'error' => $errorMessage->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
