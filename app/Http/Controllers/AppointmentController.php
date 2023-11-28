@@ -39,4 +39,22 @@ class AppointmentController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function getAllAppointments(Request $request)
+    {
+        try {
+            $appointment = Appointment::query()->get();
+            return response()->json([
+                'success' => true,
+                'message' => 'All appointments',
+                'data' => $appointment,
+            ], Response::HTTP_OK);
+        } catch (\Exception $errorMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Appointments not found',
+                'error' => $errorMessage->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
