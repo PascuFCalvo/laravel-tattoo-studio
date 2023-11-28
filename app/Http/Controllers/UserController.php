@@ -57,7 +57,7 @@ class UserController extends Controller
         }
     }
 
-    public function deleteAUserById(Request $request , $id)
+    public function deleteAUserById(Request $request, $id)
     {
         Log::info("deleteARoleById - 1");
         try {
@@ -72,6 +72,45 @@ class UserController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'User not deleted',
+                'error' => $errorMessage->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getAUserById(Request $request, $id)
+    {
+        Log::info("getARoleById - 1");
+        try {
+            $user = User::query()->findOrFail($id);
+            return response()->json([
+                'success' => true,
+                'message' => 'User found',
+                'data' => $user,
+            ], Response::HTTP_OK);
+        } catch (\Exception $errorMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found',
+                'error' => $errorMessage->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function updateAUserById(Request $request, $id)  
+    {
+        Log::info("updateARoleById - 1");
+        try {
+            $user = User::query()->findOrFail($id);
+            $user->update($request->all());
+            return response()->json([
+                'success' => true,
+                'message' => 'User updated',
+                'data' => $user,
+            ], Response::HTTP_OK);
+        } catch (\Exception $errorMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not updated',
                 'error' => $errorMessage->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

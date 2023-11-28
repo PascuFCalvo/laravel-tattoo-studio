@@ -33,3 +33,5 @@ Route::get('/', function (Request $request) {
 Route::post('/users', [UserController::class, 'createUser']);
 Route::get('/users', [UserController::class, 'getAllUsers']);
 Route::delete('/users/{id}', [UserController::class, 'deleteAUserById']);
+Route::get('/users/{id}', [UserController::class, 'getAUserById']);
+Route::put('/users/{id}', [UserController::class, 'updateAUserById']);
