@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends Controller
 {
     public function createUSer(Request $request)
-    {   
+    {
         Log::info("create Role - 1");
-        try{
+        try {
             $user = $request->all();
             dump($user);
 
@@ -23,17 +23,35 @@ class UserController extends Controller
                 'phone' => $user['phone'],
                 'role' => $user['role'],
             ]);
-            
+
             return response()->json([
                 'success' => true,
                 'message' => 'User created',
                 'data' => $user,
             ], Response::HTTP_OK);
-
-        }catch(\Exception $errorMessage){
+        } catch (\Exception $errorMessage) {
             return response()->json([
                 'success' => false,
                 'message' => 'User not created',
+                'error' => $errorMessage->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getAllUsers(Request $request)
+    {
+        Log::info("getAllRoles - 1");
+        try {
+            $users = User::query()->get();
+            return response()->json([
+                'success' => true,
+                'message' => 'Roles found',
+                'data' => $users,
+            ], Response::HTTP_OK);
+        } catch (\Exception $errorMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Roles not found',
                 'error' => $errorMessage->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
