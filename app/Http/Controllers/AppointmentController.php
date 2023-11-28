@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\TattooArtist;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +17,38 @@ class AppointmentController extends Controller
         try {
             $appointment = $request->all();
             dump($appointment);
+
+            if (empty($appointment['title'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Title is required',
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
+            if (empty($appointment['description'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Description is required',
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
+            $tattooArtistExsits = TattooArtist::query()->where('id', $appointment['tattoo_artist'])->exists();
+            if (!$tattooArtistExsits) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tattoo artist not found',
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
+            $userExsits = User::query()->where('id', $appointment['user_id'])->exists();
+            if (!$userExsits) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User not found',
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
+
 
             $appointment = Appointment::create([
                 'title' => $appointment['title'],
@@ -99,6 +133,23 @@ class AppointmentController extends Controller
         try {
             $appointment = Appointment::query()->findOrFail($id);
             $appointment->update($request->all());
+
+            $tattooArtistExsits = TattooArtist::query()->where('id', $appointment['tattoo_artist'])->exists();
+            if (!$tattooArtistExsits) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tattoo artist not found',
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
+            $userExsits = User::query()->where('id', $appointment['user_id'])->exists();
+            if (!$userExsits) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User not found',
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
             return response()->json([
                 'success' => true,
                 'message' => 'Appointment updated',

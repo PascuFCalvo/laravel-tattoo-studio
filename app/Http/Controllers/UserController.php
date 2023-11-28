@@ -9,12 +9,27 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
+    
     public function createUSer(Request $request)
     {
         Log::info("create Role - 1");
         try {
             $user = $request->all();
             dump($user);
+
+            if (empty($user['user_name']) || empty($user['email']) || empty($user['password']) || empty($user['phone']) || empty($user['role'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'All fields are required',
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
+            if ($user['role'] != 'admin' && $user['role'] != 'user' && $user['role'] != 'tattoo_artist' && $user['role'] != 'superadmin') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Role is not valid',
+                ], Response::HTTP_BAD_REQUEST);
+            }
 
             $user = User::create([
                 'user_name' => $user['user_name'],

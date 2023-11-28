@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\TattoArtistController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -45,3 +46,10 @@ Route::get('/appointments', [AppointmentController::class, 'getAllAppointments']
 Route::delete('/appointments/{id}', [AppointmentController::class, 'deleteAnAppointmentById']);
 Route::get('/appointments/{id}', [AppointmentController::class, 'getAnAppointmentById']);
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateAnAppointmentById']);
+
+//crud controler para tattoo artists
+
+Route::post('/TattooArtists', [TattoArtistController::class, 'createTattoArtist']);// Route::get('/TattooArtists', [TattoArtistController::class, 'getAllTattooArtists']);
+// Route::delete('/TattooArtists/{id}', [TattoArtistController::class, 'deleteATattooArtistById']);
+// Route::get('/TattooArtists/{id}', [TattoArtistController::class, 'getATattooArtistById']);
+// Route::put('/TattooArtists/{id}', [TattoArtistController::class, 'updateATattooArtistById']);
