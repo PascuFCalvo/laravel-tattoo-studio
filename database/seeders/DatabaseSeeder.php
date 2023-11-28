@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(
             //si quieres que se ejecuten los seeders de la carpeta database/seeders
-            [UserSeeder::class,]
+            [UserSeeder::class, TattooArtistSeeder::class,]
         );
 
         \App\Models\User::factory(10)->create();
