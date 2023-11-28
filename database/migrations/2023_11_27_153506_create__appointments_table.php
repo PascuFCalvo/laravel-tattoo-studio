@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('_appointments', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 50);
-            $table->string('description', 200);
-            $table->unsignedBigInteger('tattoo_artist');
-            $table->
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('_users');
+            $table->foreign('user_id')->references('id')
+                ->on('_users');
+            $table->unsignedBigInteger('tattoo_artist');
+            $table->foreign('tattoo_artist')->references('id')
+                ->on('_tattoo-artists');
             $table->enum('type', ['tattoo', 'piercing'])->default('tattoo');
             $table->string('appointment_date', 50);
             $table->string('appointment_turn', 50);

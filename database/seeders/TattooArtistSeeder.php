@@ -16,10 +16,10 @@ class TattooArtistSeeder extends Seeder
     public function run(): void
     {
         DB::table('_tattoo-artists')->insert([
-            'user_id' => 30,
-            'user_name' => "VYFMnqcBTZ",
+            'user_id' => 24,
+            'user_name' => "8sqpFW2rbv",
             'email' => 'tattoo@gmail.com',
-            'password' => "$2y$12$.BjDn.Wp2p5PW6Hlr7tjfOoi1wYTSmo0WH3NjIaHDtfTBeViP9FK.",
+            'password' => 1234,
             'phone' => 666666666,
             'role' => 'tattoo',
             'licenseNumber' => '123456789',

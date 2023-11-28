@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $this->call(
+        // $this->call(
             //si quieres que se ejecuten los seeders de la carpeta database/seeders
-            [UserSeeder::class, TattooArtistSeeder::class,]
-        );
+        //     [UserSeeder::class,]
+        // )
+        ;
 
         \App\Models\User::factory(10)->create();
 

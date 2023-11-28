@@ -18,8 +18,8 @@ class AppointmentSeeder extends Seeder
         DB::table('_appointments')->insert([
             'title' => Str::random(10),
             'description' => Str::random(30),
-            'tattoo_artist' => 1,
-            'user_id' => 40,
+            'tattoo_artist' => 2,
+            'user_id' => 20,
             'type' => 'tattoo',
             'appointment_date' => '2021-06-01',
             'appointment_turn' => 'morning',
@@ -29,8 +29,8 @@ class AppointmentSeeder extends Seeder
         DB::table('_appointments')->insert([
             'title' => Str::random(10),
             'description' => Str::random(30),
-            'tattoo_artist' => 1,
-            'user_id' => 41,
+            'tattoo_artist' => 2,
+            'user_id' => 21,
             'type' => 'tattoo',
             'appointment_date' => '2021-06-01',
             'appointment_turn' => 'morning',
@@ -40,8 +40,8 @@ class AppointmentSeeder extends Seeder
         DB::table('_appointments')->insert([
             'title' => Str::random(10),
             'description' => Str::random(30),
-            'tattoo_artist' => 1,
-            'user_id' => 42,
+            'tattoo_artist' => 2,
+            'user_id' => 22,
             'type' => 'tattoo',
             'appointment_date' => '2021-06-01',
             'appointment_turn' => 'morning',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,12 @@ Route::get('/users', [UserController::class, 'getAllUsers']);
 Route::delete('/users/{id}', [UserController::class, 'deleteAUserById']);
 Route::get('/users/{id}', [UserController::class, 'getAUserById']);
 Route::put('/users/{id}', [UserController::class, 'updateAUserById']);
+
+
+//crud controler para appointments
+
+Route::post('/appointments', [AppointmentController::class, 'createAppointments']);
+Route::get('/appointments', [AppointmentController::class, 'getAllAppointments']);
+Route::delete('/appointments/{id}', [AppointmentController::class, 'deleteAnAppointmentById']);
+Route::get('/appointments/{id}', [AppointmentController::class, 'getAnAppointmentById']);
+Route::put('/appointments/{id}', [AppointmentController::class, 'updateAnAppointmentById']);
