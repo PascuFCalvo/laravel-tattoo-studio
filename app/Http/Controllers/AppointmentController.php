@@ -57,4 +57,59 @@ class AppointmentController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+    public function deleteAnAppointmentById(Request $request, $id)
+    {
+        try {
+            $appointment = Appointment::query()->findOrFail($id);
+            $appointment->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Appointment deleted',
+                'data' => $appointment,
+            ], Response::HTTP_OK);
+        } catch (\Exception $errorMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Appointment not deleted',
+                'error' => $errorMessage->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getAnAppointmentById(Request $request, $id)
+    {
+        try {
+            $appointment = Appointment::query()->findOrFail($id);
+            return response()->json([
+                'success' => true,
+                'message' => 'Appointment found',
+                'data' => $appointment,
+            ], Response::HTTP_OK);
+        } catch (\Exception $errorMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Appointment not found',
+                'error' => $errorMessage->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function updateAnAppointmentById(Request $request, $id)
+    {
+        try {
+            $appointment = Appointment::query()->findOrFail($id);
+            $appointment->update($request->all());
+            return response()->json([
+                'success' => true,
+                'message' => 'Appointment updated',
+                'data' => $appointment,
+            ], Response::HTTP_OK);
+        } catch (\Exception $errorMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Appointment not updated',
+                'error' => $errorMessage->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
